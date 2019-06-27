@@ -1,0 +1,46 @@
+# skillet preamble information used by panhandler
+# ---------------------------------------------------------------------
+# unique snippet name
+name: enable_ChallengeACK
+# label used for menu selection
+label: Challenge-ACKtion
+description: This will make the firewall aware of the ChallengeACK mechanism to work unhindered.
+
+# type of device configuration
+# common types are panorama, panos, and template
+# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+type: panos
+# preload static or default-based templates
+extends:
+
+# grouping of like snippets for dynamic menu creation in panhandler
+labels:
+  service_type: configure
+  collection:
+    - OperatorTasks
+
+# ---------------------------------------------------------------------
+# end of preamble section
+
+# variables section
+# ---------------------------------------------------------------------
+# variables used in the configuration templates
+# type_hint defines the form field used by panhandler
+# type_hints can be text, ip_address, or dropdown
+variables:
+  - name: hostname
+    description: Firewall hostname
+    default: myFirewall
+# ---------------------------------------------------------------------
+# end of variables section
+
+# snippets section
+# ---------------------------------------------------------------------
+# snippets used for api configuration including xpath and element as file name
+# files will load in the order listed
+snippets:
+  - name: challengeACK
+    xpath: /config/devices/entry[@name='localhost.localdomain']/deviceconfig/setting/tcp
+    file: enable_challengeACK.xml
+# ---------------------------------------------------------------------
+# end of snippets section
